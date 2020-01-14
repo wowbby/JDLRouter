@@ -65,6 +65,9 @@ static NSString *kPageTransformFlag = @"kPageTransformFlag";
 - (void)updateStage:(JDLPageStage)stage {
     _stage = stage;
 }
+- (NSArray<NSURLQueryItem *> *)queryItems {
+    return self.urlComponents.queryItems;
+}
 - (NSURLQueryItem *)queryItemForKey:(NSString *)key {
 
     if (key.isEmpty) {

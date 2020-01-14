@@ -31,7 +31,12 @@
         }
         return;
     }
+    //    要跳转的目标页面初始化
     UIViewController *targetVC = [[class alloc] init];
+    //    请求参数
+    targetVC.queryItems = page.queryItems;
+    //    参数回传回调
+    targetVC.callback = callback;
     if (page.flag == JDLPageTransformFlagPushWithAnimation) {
         [[UIViewController currentViewController].navigationController pushViewController:targetVC animated:YES];
         if (success) {

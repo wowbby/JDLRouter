@@ -6,7 +6,10 @@
 //
 
 #import "UIViewController+JDLRouter.h"
+#import <objc/runtime.h>
 
+static NSString *const kcallback = @"kcallback";
+static NSString *const kqueryItems = @"kqueryItems";
 @implementation UIViewController (JDLRouter)
 + (UIViewController *)currentViewController {
     UIWindow *window = [[UIApplication sharedApplication].delegate window];
@@ -32,5 +35,18 @@
         }
     }
     return topViewController;
+}
+
+- (void)setCallback:(void (^)(id _Nonnull))callback {
+    objc_setAssociatedObject(self, &kcallback, callback, OBJC_ASSOCIATION_COPY);
+}
+- (void (^)(id _Nonnull))callback {
+    return objc_getAssociatedObject(self, &kcallback);
+}
+- (void)setQueryItems:(NSArray<NSURLQueryItem *> *)queryItems {
+    objc_setAssociatedObject(self, &kqueryItems, queryItems, OBJC_ASSOCIATION_RETAIN);
+}
+- (NSArray<NSURLQueryItem *> *)queryItems {
+    return objc_getAssociatedObject(self, &kqueryItems);
 }
 @end

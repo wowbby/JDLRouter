@@ -10,6 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIViewController (JDLRouter)
+@property (nonatomic, strong) void (^callback)(id data);
+@property (nonatomic, strong) NSArray<NSURLQueryItem *> *queryItems;
 + (UIViewController *)currentViewController;
 @end
 

@@ -47,6 +47,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 页面的路径
 - (NSString *)path;
 
+/// 通过路由跳转传递参数用
+- (NSArray<NSURLQueryItem *> *)queryItems;
+
 /// 根据参数名称查询参数
 /// @param key 参数名称
 - (NSURLQueryItem *)queryItemForKey:(NSString *)key;
