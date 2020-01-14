@@ -15,8 +15,6 @@
 @implementation JDLPatcher
 - (NSMutableDictionary<NSString *, id<JDLRouterLogicPatch>> *)patchMap {
     if (!_patchMap) {
-        JDLRouterLogicPatch *patch = [[JDLRouterLogicPatch alloc] init];
-        _patchMap = [@{patch.indentifire : patch} mutableCopy];
     }
     return _patchMap;
 }

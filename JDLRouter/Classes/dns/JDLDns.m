@@ -24,11 +24,26 @@
     }
     return _provider;
 }
-- (void)dnsPage:(id<JDLPage>)page {
+- (void)preparePage:(id<JDLPage>)page {
     id<JDLDnsItem> item = [self.provider itemForKey:page.originURL];
     if (item) {
         [page setLocalURL:item.value];
     }
     [page updateStage:JDLPageStagePatch];
+}
+- (void)setData:(NSDictionary<NSString *, NSString *> *)data {
+    [self.provider setData:data];
+}
+- (void)addItem:(NSString *)key value:(NSString *)value {
+    [self.provider addItem:key value:value];
+}
+- (void)addItem:(NSString *)key value:(NSString *)value replace:(BOOL)replace {
+    [self.provider addItem:key value:value replace:replace];
+}
+- (void)removeItem:(NSString *)key {
+    [self.provider removeItem:key];
+}
+- (id<JDLDnsItem>)itemForKey:(NSString *)key {
+    return [self.provider itemForKey:key];
 }
 @end

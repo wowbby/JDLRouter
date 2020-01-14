@@ -20,6 +20,14 @@
 @end
 
 @implementation JDLRouter
+- (instancetype)initWithDns:(id<JDLDns>)dns launcherPad:(id<JDLLauncherPad>)launcherPad patcher:(id<JDLPatcher>)patcher {
+    if (self = [super init]) {
+        self.dns = dns;
+        self.launcher = launcherPad;
+        self.patcher = patcher;
+    }
+    return self;
+}
 - (id<JDLDns>)dns {
     if (!_dns) {
         _dns = [[JDLDns alloc] init];
@@ -66,7 +74,7 @@
         return;
     }
 
-    [self.dns dnsPage:page];
+    [self.dns preparePage:page];
     [self patchPage:page];
     [self.launcher launchPage:page failure:failure sucess:success callback:callback];
 }

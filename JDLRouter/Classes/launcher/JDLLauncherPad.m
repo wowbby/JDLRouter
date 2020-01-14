@@ -14,8 +14,6 @@
 @implementation JDLLauncherPad
 - (instancetype)init {
     if (self = [super init]) {
-
-        [self addLauncher:[JDLLauncher new]];
     }
     return self;
 }

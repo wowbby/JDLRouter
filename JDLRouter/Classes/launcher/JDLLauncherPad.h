@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 NS_ASSUME_NONNULL_BEGIN
 
+/// Launcher的管理类
 @protocol JDLLauncherPad <NSObject>
 
 /// 添加Launcher

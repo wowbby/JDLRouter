@@ -15,8 +15,6 @@
 @synthesize dnsData = _dnsData;
 - (instancetype)init {
     if (self = [super init]) {
-
-        [self setData:@{@"http://jd.com" : @"native://test/JDLNextViewController"}];
     }
     return self;
 }

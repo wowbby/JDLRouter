@@ -23,6 +23,7 @@
 #import "JDLPatcher.h"
 #import "JDLRouterLogicPatch.h"
 #import "JDLRouter.h"
+#import "JDLRouterInjection.h"
 
 FOUNDATION_EXPORT double JDLRouterVersionNumber;
 FOUNDATION_EXPORT const unsigned char JDLRouterVersionString[];
