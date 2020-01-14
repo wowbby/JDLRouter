@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *localURL;
 @property (nonatomic, assign, readonly) JDLPageStage stage;
 - (void)updateStage:(JDLPageStage)stage;
+- (NSString *)scheme;
+- (NSString *)path;
 - (NSURLQueryItem *)queryItemForKey:(NSString *)key;
 - (void)moveQueryItemForKey:(NSString *)key;
 - (void)addQueryItemForKey:(NSString *)key value:(NSString *)value;

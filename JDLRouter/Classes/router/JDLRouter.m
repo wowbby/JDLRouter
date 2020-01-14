@@ -8,6 +8,7 @@
 #import "JDLRouter.h"
 #import "JDLDns.h"
 #import "JDLLauncher.h"
+#import "JDLLauncherPad.h"
 #import "JDLPage.h"
 #import "JDLPatcher.h"
 #import "JDLRouterException.h"
@@ -15,6 +16,7 @@
 @interface JDLRouter ()
 @property (nonatomic, strong) id<JDLDns> dns;
 @property (nonatomic, strong) id<JDLPatcher> patcher;
+@property (nonatomic, strong) id<JDLLauncherPad> launcher;
 @end
 
 @implementation JDLRouter
@@ -29,6 +31,12 @@
         _patcher = [[JDLPatcher alloc] init];
     }
     return _patcher;
+}
+- (id<JDLLauncherPad>)launcher {
+    if (!_launcher) {
+        _launcher = [[JDLLauncherPad alloc] init];
+    }
+    return _launcher;
 }
 - (void)gotoPage:(NSString *)url failure:(failureBlock)failure sucess:(successBlock)success callback:(dataBlock)callback {
 
@@ -60,6 +68,7 @@
 
     [self.dns dnsPage:page];
     [self patchPage:page];
+    [self.launcher launchPage:page];
 }
 - (void)patchPage:(id<JDLPage>)page {
 

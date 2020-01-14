@@ -97,4 +97,12 @@
         self.urlComponents.queryItems = items;
     }
 }
+- (NSString *)scheme {
+    return self.urlComponents.scheme;
+}
+- (NSString *)path {
+
+    NSString *urlString = [self.urlComponents.URL.absoluteString componentsSeparatedByString:@"?"].firstObject;
+    return [urlString componentsSeparatedByString:@"://"].lastObject;
+}
 @end
