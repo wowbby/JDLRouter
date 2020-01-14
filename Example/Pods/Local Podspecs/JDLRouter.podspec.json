@@ -1,0 +1,51 @@
+{
+  "name": "JDLRouter",
+  "version": "0.1.0",
+  "summary": "A short description of JDLRouter.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/zhengzhenxing/JDLRouter",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "zhengzhenxing": "zhengzhenxing3@jd.com"
+  },
+  "source": {
+    "git": "https://github.com/zhengzhenxing/JDLRouter.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "subspecs": [
+    {
+      "name": "router",
+      "source_files": "JDLRouter/Classes/router/*"
+    },
+    {
+      "name": "page",
+      "source_files": "JDLRouter/Classes/page/*"
+    },
+    {
+      "name": "dns",
+      "source_files": "JDLRouter/Classes/dns/*"
+    },
+    {
+      "name": "patcher",
+      "source_files": "JDLRouter/Classes/patcher/*"
+    },
+    {
+      "name": "launcher",
+      "source_files": "JDLRouter/Classes/launcher/*"
+    },
+    {
+      "name": "others",
+      "source_files": "JDLRouter/Classes/others/*"
+    },
+    {
+      "name": "exception",
+      "source_files": "JDLRouter/Classes/exception/*"
+    }
+  ]
+}

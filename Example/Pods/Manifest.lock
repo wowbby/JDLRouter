@@ -1,0 +1,30 @@
+PODS:
+  - JDLRouter (0.1.0):
+    - JDLRouter/dns (= 0.1.0)
+    - JDLRouter/exception (= 0.1.0)
+    - JDLRouter/launcher (= 0.1.0)
+    - JDLRouter/others (= 0.1.0)
+    - JDLRouter/page (= 0.1.0)
+    - JDLRouter/patcher (= 0.1.0)
+    - JDLRouter/router (= 0.1.0)
+  - JDLRouter/dns (0.1.0)
+  - JDLRouter/exception (0.1.0)
+  - JDLRouter/launcher (0.1.0)
+  - JDLRouter/others (0.1.0)
+  - JDLRouter/page (0.1.0)
+  - JDLRouter/patcher (0.1.0)
+  - JDLRouter/router (0.1.0)
+
+DEPENDENCIES:
+  - JDLRouter (from `../`)
+
+EXTERNAL SOURCES:
+  JDLRouter:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  JDLRouter: a8f3c4cbb9ece766cf212f5eca631f07f0ea356e
+
+PODFILE CHECKSUM: a3cb32bfa7f3d82ee55b6bc226533ed58e12e226
+
+COCOAPODS: 1.8.4
