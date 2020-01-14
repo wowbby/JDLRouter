@@ -12,6 +12,12 @@ typedef void (^failureBlock)(NSError *error);
 typedef void (^successBlock)(void);
 typedef void (^dataBlock)(id data);
 @protocol JDLRouter <NSObject>
+
+/// 页面跳转
+/// @param url 要跳转的页面URL
+/// @param failure 失败回调
+/// @param success 成功回调
+/// @param callback 数据回传的回调
 - (void)gotoPage:(NSString *)url failure:(failureBlock)failure sucess:(successBlock)success callback:(dataBlock)callback;
 @end
 

@@ -9,28 +9,23 @@
 #import "NSString+JDLRouter.h"
 @interface JDLDnsProvider ()
 @property (nonatomic, strong) NSMutableDictionary<NSString *, id<JDLDnsItem>> *dnsData;
-@property (nonatomic, strong) dispatch_queue_t queue;
 @end
 
 @implementation JDLDnsProvider
 @synthesize dnsData = _dnsData;
+- (instancetype)init {
+    if (self = [super init]) {
+
+        [self setData:@{@"http://jd.com" : @"native://test/JDLNextViewController"}];
+    }
+    return self;
+}
 #pragma mark - property getter && setter -
 - (NSMutableDictionary<NSString *, id<JDLDnsItem>> *)dnsData {
     if (!_dnsData) {
         _dnsData = [@{} mutableCopy];
     }
     return _dnsData;
-}
-- (void)setDnsData:(NSMutableDictionary<NSString *, id<JDLDnsItem>> *)dnsData {
-    dispatch_barrier_async(self.queue, ^{
-        self->_dnsData = dnsData;
-    });
-}
-- (dispatch_queue_t)queue {
-    if (!_queue) {
-        _queue = dispatch_queue_create("JDLDnsProvider_Queue", DISPATCH_QUEUE_CONCURRENT);
-    }
-    return _queue;
 }
 #pragma mark - public method
 - (void)setData:(NSDictionary<NSString *, NSString *> *)data {
@@ -47,9 +42,7 @@
     }
     JDLDnsItem *item = [[JDLDnsItem alloc] initWithKey:key value:value];
     if (item) {
-        dispatch_barrier_async(self.queue, ^{
-            [self.dnsData setValue:item forKey:key];
-        });
+        [self.dnsData setValue:item forKey:key];
     }
 }
 - (void)removeItem:(NSString *)key {
@@ -63,7 +56,9 @@
     if (key.isEmpty || !key.isURL) {
         return nil;
     }
-    return self.dnsData[key];
+    NSArray<NSString *> *urlComponents = [key componentsSeparatedByString:@"?"];
+    NSString *mainPath = urlComponents.firstObject;
+    return self.dnsData[mainPath];
 }
 #pragma mark - private method
 - (BOOL)isContainItemWithKey:(NSString *)key {

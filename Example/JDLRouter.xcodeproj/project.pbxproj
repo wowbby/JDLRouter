@@ -24,6 +24,7 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		CF54A01B23CDB1D900D33FEC /* JDLNextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF54A01A23CDB1D900D33FEC /* JDLNextViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,8 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9F32AEAF61566DB9285A1E55 /* Pods-JDLRouter_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JDLRouter_Tests.debug.xcconfig"; path = "Target Support Files/Pods-JDLRouter_Tests/Pods-JDLRouter_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A186074BE770C027074B608C /* Pods_JDLRouter_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JDLRouter_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF54A01923CDB1D900D33FEC /* JDLNextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JDLNextViewController.h; sourceTree = "<group>"; };
+		CF54A01A23CDB1D900D33FEC /* JDLNextViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JDLNextViewController.m; sourceTree = "<group>"; };
 		D0270928DCD9CD498347DD42 /* Pods-JDLRouter_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JDLRouter_Tests.release.xcconfig"; path = "Target Support Files/Pods-JDLRouter_Tests/Pods-JDLRouter_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		F7E6602D424D43A7F8D5D376 /* Pods-JDLRouter_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JDLRouter_Example.debug.xcconfig"; path = "Target Support Files/Pods-JDLRouter_Example/Pods-JDLRouter_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,6 +151,8 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* JDLViewController.h */,
 				6003F5A6195388D20070C39A /* JDLViewController.m */,
+				CF54A01923CDB1D900D33FEC /* JDLNextViewController.h */,
+				CF54A01A23CDB1D900D33FEC /* JDLNextViewController.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -369,6 +374,7 @@
 			files = (
 				6003F59E195388D20070C39A /* JDLAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* JDLViewController.m in Sources */,
+				CF54A01B23CDB1D900D33FEC /* JDLNextViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

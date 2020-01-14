@@ -8,6 +8,7 @@
 #import "JDLPage.h"
 #import "NSString+JDLRouter.h"
 #import "NSURLComponents+JDLRouter.h"
+static NSString *kPageTransformFlag = @"kPageTransformFlag";
 @interface JDLPage ()
 @property (nonatomic, copy) NSString *originURL;
 @property (nonatomic, strong) NSURLComponents *urlComponents;
@@ -29,6 +30,28 @@
     }
     return self;
 }
+- (JDLPageTransformFlag)flag {
+    NSURLQueryItem *item = [self queryItemForKey:kPageTransformFlag];
+    if (!item) {
+        return JDLPageTransformFlagPushWithAnimation;
+    }
+    if ([item.value isEqualToString:@"0"]) {
+        return JDLPageTransformFlagPushWithAnimation;
+    }
+    if ([item.value isEqualToString:@"1"]) {
+        return JDLPageTransformFlagPresentWithAnimation;
+    }
+    if ([item.value isEqualToString:@"2"]) {
+        return JDLPageTransformFlagPushWithoutAnimation;
+    }
+    if ([item.value isEqualToString:@"3"]) {
+        return JDLPageTransformFlagPresentWithoutAnimation;
+    }
+    if ([item.value isEqualToString:@"4"]) {
+        return JDLPageTransformFlagBack;
+    }
+    return JDLPageTransformFlagPushWithAnimation;
+}
 - (void)setOriginURL:(NSString *)originURL {
     _originURL = originURL;
     _urlComponents = [NSURLComponents componentsWithString:_originURL];
@@ -36,7 +59,8 @@
 - (void)setLocalURL:(NSString *)localURL {
     _localURL = localURL;
     NSURLComponents *components = [NSURLComponents componentsWithString:_localURL];
-    [_urlComponents mergeQuery:components];
+    [components mergeQuery:_urlComponents];
+    _urlComponents = components;
 }
 - (void)updateStage:(JDLPageStage)stage {
     _stage = stage;

@@ -6,6 +6,8 @@
 //
 
 #import "JDLLauncher.h"
+#import "JDLRouterException.h"
+#import "UIViewController+JDLRouter.h"
 
 @implementation JDLLauncher
 @synthesize indentifire;
@@ -15,28 +17,53 @@
 - (NSMutableDictionary<NSString *, NSMutableArray<NSString *> *> *)paths {
 
     return [@{
-        @"http" : @[ @"jd.com" ],
+        @"native" : @[],
     } mutableCopy];
 }
-- (NSInteger)matchPage:(id<JDLPage>)page {
-    if (![self.paths.allKeys containsObject:page.scheme]) {
-        return 0;
-    }
-    NSArray<NSString *> *paths = [self.paths valueForKey:page.scheme];
-    __block NSInteger macthPathLength = 0;
-    [paths enumerateObjectsUsingBlock:^(NSString *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
-        if ([page.path containsString:obj]) {
-            if (macthPathLength == 0 || obj.length < page.path.length) {
-                macthPathLength = obj.length;
-            }
-        }
-    }];
-    if (macthPathLength == 0) {
-        return 1;
-    }
-    return macthPathLength;
-}
-- (void)launchPage:(id<JDLPage>)page {
-}
+- (void)launchPage:(id<JDLPage>)page failure:(void (^)(NSError *_Nonnull))failure sucess:(void (^)(void))success callback:(void (^)(id _Nonnull))callback {
 
+    NSLog(@"默认launcher 匹配到");
+    Class class = NSClassFromString([self classStringFromPage:page]);
+    if (!class || [class isKindOfClass:UICollectionView.class]) {
+        if (failure) {
+            NSError *error = [NSError errorWithDomain:kJDLRouterErrorDomain code:JDLRouterErrorCodePageNativeClassNotFound userInfo:nil];
+            failure(error);
+        }
+        return;
+    }
+    UIViewController *targetVC = [[class alloc] init];
+    if (page.flag == JDLPageTransformFlagPushWithAnimation) {
+        [[UIViewController currentViewController].navigationController pushViewController:targetVC animated:YES];
+        if (success) {
+            success();
+        }
+        return;
+    }
+    if (page.flag == JDLPageTransformFlagPresentWithAnimation) {
+        [[UIViewController currentViewController] presentViewController:targetVC animated:YES completion:nil];
+        if (success) {
+            success();
+        }
+        return;
+    }
+    if (page.flag == JDLPageTransformFlagPushWithoutAnimation) {
+        [[UIViewController currentViewController].navigationController pushViewController:targetVC animated:NO];
+        if (success) {
+            success();
+        }
+        return;
+    }
+    if (page.flag == JDLPageTransformFlagPresentWithoutAnimation) {
+        [[UIViewController currentViewController] presentViewController:targetVC animated:NO completion:nil];
+        if (success) {
+            success();
+        }
+        return;
+    }
+}
+- (NSString *)classStringFromPage:(id<JDLPage>)page {
+    NSString *path = page.path;
+    NSArray *pathComponents = [path componentsSeparatedByString:@"/"];
+    return pathComponents.lastObject;
+}
 @end

@@ -8,17 +8,14 @@
 #import "JDLPage.h"
 #import <Foundation/Foundation.h>
 NS_ASSUME_NONNULL_BEGIN
-
 @protocol JDLLauncher <NSObject>
 @property (nonatomic, strong) NSString *indentifire;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSMutableArray<NSString *> *> *paths;
 
-/// 匹配Page，如果返回0，说明这个Launcher与page不匹配，如果返回1，说明只有schemer匹配，返回其他值代表path的匹配长度
-/// @param page JDLPage
-- (NSInteger)matchPage:(id<JDLPage>)page;
-- (void)launchPage:(id<JDLPage>)page;
+- (void)launchPage:(id<JDLPage>)page failure:(void (^)(NSError *error))failure sucess:(void (^)(void))success callback:(void (^)(id data))callback;
 @end
 
+/// 默认Launcher实现，用于原生页面的跳转
 @interface JDLLauncher : NSObject <JDLLauncher>
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSMutableArray<NSString *> *> *paths;
 @end

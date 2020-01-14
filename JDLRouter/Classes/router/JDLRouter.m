@@ -68,7 +68,7 @@
 
     [self.dns dnsPage:page];
     [self patchPage:page];
-    [self.launcher launchPage:page];
+    [self.launcher launchPage:page failure:failure sucess:success callback:callback];
 }
 - (void)patchPage:(id<JDLPage>)page {
 

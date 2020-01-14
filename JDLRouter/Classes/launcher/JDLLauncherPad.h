@@ -11,10 +11,23 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol JDLLauncherPad <NSObject>
+
+/// 添加Launcher
+/// @param launcher JDLLauncher
 - (void)addLauncher:(id<JDLLauncher>)launcher;
+
+/// 移除Launcher
+/// @param launcher JDLLauncher
 - (void)removeLauncher:(id<JDLLauncher>)launcher;
+
+/// 匹配Launcher
+/// @param page JDLLauncher
 - (id<JDLLauncher>)matchLauncher:(id<JDLPage>)page;
-- (void)launchPage:(id<JDLPage>)page;
+
+/// 打开Page
+/// @param page JDLPage
+- (void)launchPage:(id<JDLPage>)page failure:(void (^)(NSError *error))failure sucess:(void (^)(void))success callback:(void (^)(id data))callback;
+;
 @end
 
 @interface JDLLauncherPad : NSObject <JDLLauncherPad>

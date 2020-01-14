@@ -18,6 +18,7 @@
 #import "JDLLauncherPad.h"
 #import "NSString+JDLRouter.h"
 #import "NSURLComponents+JDLRouter.h"
+#import "UIViewController+JDLRouter.h"
 #import "JDLPage.h"
 #import "JDLPatcher.h"
 #import "JDLRouterLogicPatch.h"

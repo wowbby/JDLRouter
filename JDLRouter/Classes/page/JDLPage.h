@@ -10,15 +10,23 @@
 typedef NS_ENUM(NSInteger, JDLPageStage) {
     JDLPageStageDns = 0,
     JDLPageStagePatch,
-    JDLPageStageLaunch
+    JDLPageStageLaunch,
+    JDLPageStageFinish
 };
-
+typedef NS_ENUM(NSInteger, JDLPageTransformFlag) {
+    JDLPageTransformFlagPushWithAnimation,
+    JDLPageTransformFlagPresentWithAnimation,
+    JDLPageTransformFlagPushWithoutAnimation,
+    JDLPageTransformFlagPresentWithoutAnimation,
+    JDLPageTransformFlagBack
+};
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol JDLPage <NSObject>
 @property (nonatomic, copy, readonly) NSString *originURL;
 @property (nonatomic, copy) NSString *localURL;
 @property (nonatomic, assign, readonly) JDLPageStage stage;
+@property (nonatomic, assign, readonly) JDLPageTransformFlag flag;
 - (void)updateStage:(JDLPageStage)stage;
 - (NSString *)scheme;
 - (NSString *)path;
@@ -33,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSString *originURL;
 @property (nonatomic, copy) NSString *localURL;
 @property (nonatomic, assign, readonly) JDLPageStage stage;
+@property (nonatomic, assign, readonly) JDLPageTransformFlag flag;
 - (instancetype)initWithOriginURL:(NSString *)originURL;
 
 @end

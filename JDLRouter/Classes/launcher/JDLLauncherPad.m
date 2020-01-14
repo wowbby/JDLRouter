@@ -6,7 +6,7 @@
 //
 
 #import "JDLLauncherPad.h"
-
+#import "JDLRouterException.h"
 @interface JDLLauncherPad ()
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSArray<id<JDLLauncher>> *> *launchers;
 @end
@@ -25,9 +25,16 @@
     }
     return _launchers;
 }
-- (void)launchPage:(id<JDLPage>)page {
+- (void)launchPage:(id<JDLPage>)page failure:(void (^)(NSError *error))failure sucess:(void (^)(void))success callback:(void (^)(id data))callback {
     id<JDLLauncher> launcher = [self matchLauncher:page];
-    [launcher launchPage:page];
+    if (!launcher) {
+        if (failure) {
+            NSError *error = [NSError errorWithDomain:kJDLRouterErrorDomain code:JDLRouterErrorCodePageLauncherNotFound userInfo:nil];
+            failure(error);
+        }
+        return;
+    }
+    [launcher launchPage:page failure:failure sucess:success callback:callback];
 }
 - (void)addLauncher:(id<JDLLauncher>)launcher {
     NSArray<NSString *> *schemes = launcher.paths.allKeys;
@@ -47,7 +54,7 @@
     __block id<JDLLauncher> targetLauncher;
     __block NSInteger matchLength = 0;
     [launchers enumerateObjectsUsingBlock:^(id<JDLLauncher> _Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
-        NSInteger tMatchLength = [obj matchPage:page];
+        NSInteger tMatchLength = [self matchPage:page launcher:obj];
 
         if (tMatchLength > matchLength) {
             targetLauncher = obj;
@@ -56,6 +63,24 @@
     }];
 
     return targetLauncher;
+}
+- (NSInteger)matchPage:(id<JDLPage>)page launcher:(id<JDLLauncher>)launcher {
+    if (![launcher.paths.allKeys containsObject:page.scheme]) {
+        return 0;
+    }
+    NSArray<NSString *> *paths = [launcher.paths valueForKey:page.scheme];
+    __block NSInteger macthPathLength = 0;
+    [paths enumerateObjectsUsingBlock:^(NSString *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
+        if ([page.path containsString:obj]) {
+            if (macthPathLength == 0 || obj.length < page.path.length) {
+                macthPathLength = obj.length;
+            }
+        }
+    }];
+    if (macthPathLength == 0) {
+        return 1;
+    }
+    return macthPathLength;
 }
 - (void)removeLauncher:(id<JDLLauncher>)launcher {
 

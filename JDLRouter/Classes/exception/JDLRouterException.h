@@ -8,14 +8,16 @@
 #ifndef JDLRouterException_h
 #define JDLRouterException_h
 
-NSString *kJDLRouterErrorDomain = @"com.jd.JDLRouter";
+#define kJDLRouterErrorDomain @"com.jd.JDLRouter"
 
 typedef NS_ENUM(NSInteger, JDLRouterErrorCode) {
 
     JDLRouterErrorCodeNone = 1000,
     JDLRouterErrorCodeOriginURLNull,
     JDLRouterErrorCodeOriginURLInvalid,
-    JDLRouterErrorCodePageInitFailure
+    JDLRouterErrorCodePageInitFailure,
+    JDLRouterErrorCodePageLauncherNotFound,
+    JDLRouterErrorCodePageNativeClassNotFound
 };
 
 #endif /* JDLRouterException_h */
